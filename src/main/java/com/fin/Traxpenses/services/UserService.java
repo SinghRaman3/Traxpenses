@@ -70,6 +70,7 @@ public class UserService {
     public void deleteUser(UUID id) {
         User user = getUserById(id);
         user.setActive(false);
+        userRepository.save(user);
     }
 
     /**

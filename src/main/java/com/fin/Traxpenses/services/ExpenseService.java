@@ -108,4 +108,16 @@ public class ExpenseService {
         expense.setDeleted(true);
         expenseRepository.save(expense);
     }
+
+    /**
+     * Delete all expense of a particular user
+     * @param userId
+     */
+    public void deleteAllExpensesOfUser(UUID userId) {
+        List<Expense> expenseList =  expenseRepository.findByUserIdAndDeletedFalse(userId);
+        for(Expense expense: expenseList) {
+            expense.setDeleted(true);
+            expenseRepository.save(expense);
+        }
+    }
 }

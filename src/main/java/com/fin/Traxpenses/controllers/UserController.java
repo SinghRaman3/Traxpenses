@@ -1,6 +1,7 @@
 package com.fin.Traxpenses.controllers;
 
 import com.fin.Traxpenses.models.User;
+import com.fin.Traxpenses.services.OrchestrationService;
 import com.fin.Traxpenses.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrchestrationService orchestrationService;
 
     @GetMapping("all-users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -23,7 +26,7 @@ public class UserController {
 
     @DeleteMapping()
     public ResponseEntity<String> deleteUser(@RequestParam("id") UUID id) {
-        userService.deleteUser(id);
+        orchestrationService.deleteUserAndExpenses(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
 

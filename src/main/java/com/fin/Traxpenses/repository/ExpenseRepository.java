@@ -12,6 +12,9 @@ import java.util.UUID;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, UUID> {
+
+    List<Expense> findByUserIdAndDeletedFalse(UUID userId);
+
     @Query("""
     SELECT e FROM Expense e
     WHERE e.userId = :userId
